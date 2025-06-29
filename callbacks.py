@@ -239,7 +239,7 @@ class DDPMCB(TrainCB):
             image_embeds = image_embeds.repeat_interleave(num_images_per_prompt, dim=0)
         negative_image_embeds = negative_image_embeds.repeat_interleave(num_images_per_prompt, dim=0)
         image_embeds = torch.cat([negative_image_embeds, image_embeds], dim=0).to(
-            dtype=unet.dtype, device=device
+            dtype=torch.float16, device=device
         )
         scheduler.set_timesteps(num_inference_steps, device=device)
         timesteps = scheduler.timesteps
